@@ -83,7 +83,7 @@ export default function ActiveEmergencies() {
             Active Emergencies
           </h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            Auto-refreshes every 30 s · Last updated {formatRelativeTime(lastRefresh)}
+            Auto-refreshes every 30 s · Last updated {formatRelativeTime(lastRefresh.getTime())}
           </p>
         </div>
 
