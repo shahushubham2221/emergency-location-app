@@ -1,0 +1,68 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return request.auth.uid == userId;
+    }
+    function isAdmin() {
+      return isAuthenticated() &&
+        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid));
+    }
+
+    // Users: can only read/write own profile
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+      allow read: if isAdmin();
+
+      // Trusted contacts: private to user
+      match /trustedContacts/{contactId} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // SOS Sessions
+    match /sosSessions/{sessionId} {
+      allow create: if isAuthenticated() && request.resource.data.userId == request.auth.uid;
+      allow read, update: if isAuthenticated() &&
+        (resource.data.userId == request.auth.uid || isAdmin());
+      allow read: if isAdmin();
+
+      // Location updates
+      match /locationUpdates/{pointId} {
+        allow create: if isAuthenticated() &&
+          get(/databases/$(database)/documents/sosSessions/$(sessionId)).data.userId == request.auth.uid;
+        allow read: if isAuthenticated() &&
+          (get(/databases/$(database)/documents/sosSessions/$(sessionId)).data.userId == request.auth.uid || isAdmin());
+      }
+    }
+
+    // Admin users collection: readable by admins only
+    match /adminUsers/{userId} {
+      allow read: if isAdmin() || isOwner(userId);
+      allow write: if false; // Only via Firebase Admin SDK
+    }
+
+    // Audit logs: admins only
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow write: if false; // Only via Admin SDK
+    }
+
+    // Emergency services: readable by authenticated users
+    match /emergencyServices/{serviceId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    // Notifications: readable by owner and admin
+    match /notifications/{notifId} {
+      allow read, write: if isAuthenticated() &&
+        resource.data.userId == request.auth.uid;
+      allow read: if isAdmin();
+    }
+  }
+}

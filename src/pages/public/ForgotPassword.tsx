@@ -1,0 +1,174 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Shield, Mail, ArrowLeft, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react';
+import { resetPassword } from '../../services/auth.service';
+
+// ─── Schema ───────────────────────────────────────────────────────────────────
+
+const schema = z.object({
+  email: z.string().email('Enter a valid email address'),
+});
+
+type FormValues = z.infer<typeof schema>;
+
+// ─── Component ────────────────────────────────────────────────────────────────
+
+export default function ForgotPassword() {
+  const [serverError, setServerError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    getValues,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>({ resolver: zodResolver(schema) });
+
+  async function onSubmit(values: FormValues) {
+    setServerError(null);
+    try {
+      await resetPassword(values.email);
+      setSuccess(true);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : 'Failed to send reset email';
+      if (msg.includes('user-not-found') || msg.includes('invalid-email')) {
+        setServerError('No account found with that email address.');
+      } else {
+        setServerError(msg);
+      }
+    }
+  }
+
+  return (
+    <div className="min-h-screen bg-[#F0F4FF] flex flex-col items-center justify-center px-4 py-12">
+      {/* Logo */}
+      <motion.div
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="flex items-center gap-2 mb-8"
+      >
+        <Shield className="text-red-600" size={30} aria-hidden="true" />
+        <span className="text-2xl font-extrabold text-gray-900 tracking-tight">SOS Guardian</span>
+      </motion.div>
+
+      {/* Card */}
+      <motion.div
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1 }}
+        className="w-full max-w-sm bg-white/70 backdrop-blur border border-white/60 rounded-3xl shadow-xl p-8"
+      >
+        <AnimatePresence mode="wait">
+          {success ? (
+            /* ── Success state ── */
+            <motion.div
+              key="success"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="text-center py-4"
+            >
+              <div className="w-16 h-16 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-5">
+                <CheckCircle2 className="text-green-600" size={34} aria-hidden="true" />
+              </div>
+              <h2 className="text-xl font-bold text-gray-900 mb-2">Check your email</h2>
+              <p className="text-sm text-gray-500 leading-relaxed mb-2">
+                We've sent password reset instructions to:
+              </p>
+              <p className="text-sm font-semibold text-gray-800 mb-6 break-all">
+                {getValues('email')}
+              </p>
+              <p className="text-xs text-gray-400 mb-8">
+                Didn't receive it? Check your spam folder or wait a few minutes before trying again.
+              </p>
+              <Link
+                to="/login"
+                className="inline-flex items-center justify-center gap-2 text-blue-600 font-semibold text-sm hover:underline"
+              >
+                <ArrowLeft size={16} aria-hidden="true" />
+                Back to Sign In
+              </Link>
+            </motion.div>
+          ) : (
+            /* ── Form state ── */
+            <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+              <h1 className="text-2xl font-bold text-gray-900 mb-1">Reset password</h1>
+              <p className="text-sm text-gray-500 mb-8">
+                Enter your email address and we'll send you a link to reset your password.
+              </p>
+
+              {serverError && (
+                <div
+                  className="flex items-start gap-2 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl px-4 py-3 mb-6"
+                  role="alert"
+                >
+                  <AlertCircle size={16} className="shrink-0 mt-0.5" aria-hidden="true" />
+                  <span>{serverError}</span>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">
+                <div>
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1.5">
+                    Email address
+                  </label>
+                  <div className="relative">
+                    <Mail
+                      size={16}
+                      className="absolute left-3.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none"
+                      aria-hidden="true"
+                    />
+                    <input
+                      id="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      aria-invalid={!!errors.email}
+                      aria-describedby={errors.email ? 'email-error' : undefined}
+                      className="w-full pl-10 pr-4 py-3 bg-white border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition min-h-[48px]"
+                      {...register('email')}
+                    />
+                  </div>
+                  {errors.email && (
+                    <p id="email-error" className="mt-1.5 text-xs text-red-600" role="alert">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2 transition-all min-h-[52px]"
+                  aria-busy={isSubmitting}
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 size={18} className="animate-spin" aria-hidden="true" />
+                      Sending…
+                    </>
+                  ) : (
+                    'Send Reset Link'
+                  )}
+                </button>
+              </form>
+
+              <div className="mt-6 text-center">
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <ArrowLeft size={14} aria-hidden="true" />
+                  Back to Sign In
+                </Link>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
+  );
+}
