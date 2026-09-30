@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
   Shield,
@@ -81,8 +81,15 @@ const FEATURES = [
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+import { useAuth } from '../../hooks/useAuth';
+
 export default function Landing() {
+  const { user, loading } = useAuth();
   const howItWorksRef = useRef<HTMLElement>(null);
+
+  if (!loading && user) {
+    return <Navigate to="/app/home" replace />;
+  }
 
   function scrollToHowItWorks() {
     howItWorksRef.current?.scrollIntoView({ behavior: 'smooth' });

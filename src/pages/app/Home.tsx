@@ -283,27 +283,6 @@ export default function Home() {
           </Link>
         </motion.div>
       </main>
-
-      {/* ── Bottom nav ── */}
-      <nav className="sticky bottom-0 bg-white/80 dark:bg-slate-900/80 transition-colors backdrop-blur border-t border-gray-100 flex items-center justify-around px-2 py-2 safe-area-bottom" aria-label="Main navigation">
-        {[
-          { to: '/app/home', icon: Shield, label: 'Home' },
-          { to: '/app/map', icon: MapPin, label: 'Map' },
-          { to: '/app/contacts', icon: Users, label: 'Contacts' },
-          { to: '/app/emergency-services', icon: Building2, label: 'Help' },
-          { to: '/app/settings', icon: Settings, label: 'Settings' },
-        ].map(({ to, icon: Icon, label }) => (
-          <Link
-            key={to}
-            to={to}
-            className="flex flex-col items-center gap-1 px-3 py-2 rounded-xl text-gray-500 hover:text-blue-600 transition-colors min-w-[48px] min-h-[48px] justify-center"
-            aria-label={label}
-          >
-            <Icon size={20} aria-hidden="true" />
-            <span className="text-[10px] font-medium">{label}</span>
-          </Link>
-        ))}
-      </nav>
     </div>
   );
 }

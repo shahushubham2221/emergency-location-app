@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -18,10 +18,17 @@ type FormValues = z.infer<typeof schema>;
 
 // ─── Component ────────────────────────────────────────────────────────────────
 
+import { useAuth } from '../../hooks/useAuth';
+
 export default function Login() {
+  const { user, loading } = useAuth();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+
+  if (!loading && user) {
+    return <Navigate to="/app/home" replace />;
+  }
 
   const {
     register,

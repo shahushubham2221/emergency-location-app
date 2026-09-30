@@ -1,4 +1,4 @@
-const CACHE_NAME = 'sos-guardian-v1';
+const CACHE_NAME = 'sos-guardian-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -21,7 +21,9 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('fetch', (event) => {
-  // Network-first strategy: try network, fall back to cache
+  // Network-first strategy: try network, fall back to cache (only for GET)
+  if (event.request.method !== 'GET') return;
+
   event.respondWith(
     fetch(event.request).catch(() =>
       caches.match(event.request).then((r) => r ?? new Response('Offline', { status: 503 }))

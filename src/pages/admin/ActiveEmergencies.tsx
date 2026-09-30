@@ -12,7 +12,6 @@ import { getAllActiveSessions } from '../../services/sos.service';
 import { formatRelativeTime, formatDuration } from '../../utils/formatters';
 import type { SOSSession } from '../../types/sos';
 
-// Dynamic import for MapView to avoid SSR issues
 import { MapView } from '../../components/location/MapView';
 
 const REFRESH_INTERVAL_MS = 30_000;
@@ -42,7 +41,6 @@ export default function ActiveEmergencies() {
     }
   };
 
-  // Auto-refresh every 30 s
   useEffect(() => {
     fetchSessions();
 
@@ -57,15 +55,15 @@ export default function ActiveEmergencies() {
     };
   }, []);
 
-  // Build map markers from latest location of each session
   const mapMarkers = sessions
     .filter((s) => s.lastLocation)
     .map((s) => ({
       id: s.id,
       lat: s.lastLocation!.latitude,
       lon: s.lastLocation!.longitude,
-      label: `SOS — ${s.userId.slice(0, 8)}…`,
+      label: `SOS - ${s.userId.slice(0, 8)}...`,
       accuracy: s.lastLocation!.accuracy,
+      type: 'default'
     }));
 
   const getDuration = (session: SOSSession) => {
@@ -75,7 +73,6 @@ export default function ActiveEmergencies() {
 
   return (
     <div className="p-8 text-white">
-      {/* Header */}
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl font-bold text-white flex items-center gap-2">
@@ -83,7 +80,7 @@ export default function ActiveEmergencies() {
             Active Emergencies
           </h1>
           <p className="text-slate-400 text-sm mt-0.5">
-            Auto-refreshes every 30 s · Last updated {formatRelativeTime(lastRefresh.getTime())}
+            Auto-refreshes every 30s • Last updated {formatRelativeTime(lastRefresh.getTime())}
           </p>
         </div>
 
@@ -109,19 +106,16 @@ export default function ActiveEmergencies() {
         </div>
       )}
 
-      {/* Map */}
       {mapMarkers.length > 0 && (
         <div className="bg-slate-800 border border-slate-700 rounded-xl overflow-hidden mb-6" style={{ height: '360px' }}>
           <MapView
             center={[20.5937, 78.9629]}
-              zoom={4}
-              markers={mapMarkers}
-            className="w-full h-full"
+            zoom={4}
+            markers={mapMarkers}
           />
         </div>
       )}
 
-      {/* Session List */}
       {loading ? (
         <div className="space-y-4">
           {[0, 1, 2].map((i) => (
@@ -132,7 +126,7 @@ export default function ActiveEmergencies() {
         <div className="bg-slate-800 border border-slate-700 rounded-xl flex flex-col items-center justify-center py-16 text-center">
           <CheckCircle2 className="w-12 h-12 text-emerald-400 mb-4" aria-hidden="true" />
           <h2 className="text-white font-semibold text-lg">No active emergencies</h2>
-          <p className="text-slate-400 text-sm mt-1">All systems clear — no ongoing SOS sessions detected.</p>
+          <p className="text-slate-400 text-sm mt-1">All systems clear - no ongoing SOS sessions detected.</p>
         </div>
       ) : (
         <div className="space-y-4" role="list" aria-label="Active emergency sessions">
@@ -140,10 +134,7 @@ export default function ActiveEmergencies() {
             const isOnline =
               session.lastLocation &&
               session.updatedAt &&
-              Date.now() -
-                (session.updatedAt
-                ) <
-                120_000;
+              Date.now() - session.updatedAt < 120_000;
 
             return (
               <article
@@ -152,7 +143,6 @@ export default function ActiveEmergencies() {
                 className="bg-slate-800 border border-red-500/30 rounded-xl p-5"
               >
                 <div className="flex items-start justify-between gap-4 flex-wrap">
-                  {/* User / Session Info */}
                   <div className="min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" aria-hidden="true" />
@@ -166,7 +156,6 @@ export default function ActiveEmergencies() {
                     </p>
                   </div>
 
-                  {/* Status Badges */}
                   <div className="flex flex-wrap gap-2 shrink-0">
                     <span
                       className={`flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-full ${
@@ -191,7 +180,6 @@ export default function ActiveEmergencies() {
                   </div>
                 </div>
 
-                {/* Metrics Row */}
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
                   <div className="bg-slate-700/50 rounded-lg px-3 py-2">
                     <p className="text-slate-400 text-xs mb-0.5">Duration</p>
