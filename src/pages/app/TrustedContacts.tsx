@@ -61,14 +61,14 @@ export default function TrustedContacts() {
   const enabledCount = contacts.filter((c) => c.enabled).length;
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header
         title="Trusted Contacts"
         showBack={false}
         rightAction={
           <button
             onClick={() => setFormOpen(true)}
-            className="flex items-center gap-1.5 bg-blue-600 text-white text-sm font-semibold px-4 py-2 rounded-xl min-h-[40px] hover:bg-blue-700 transition-colors"
+            className="flex items-center gap-1.5 bg-blue-600 text-white text-sm font-semibold px-3.5 sm:px-4 py-2 rounded-xl min-h-[40px] hover:bg-blue-700 transition-colors shrink-0"
             aria-label="Add trusted contact"
           >
             <Plus size={16} aria-hidden="true" />
@@ -77,7 +77,7 @@ export default function TrustedContacts() {
         }
       />
 
-      <main className="px-4 py-4 pb-24 max-w-lg mx-auto space-y-3">
+      <main className="px-3.5 sm:px-4 py-4 pb-24 max-w-lg mx-auto space-y-3 w-full">
         {contacts.length > 0 && (
           <div className="bg-white/70 dark:bg-slate-900/70 transition-colors backdrop-blur rounded-2xl p-4 border border-white/60 dark:border-slate-800 flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center shrink-0">

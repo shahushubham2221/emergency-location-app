@@ -20,14 +20,14 @@ export default function MapPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col w-full overflow-x-hidden">
       <Header 
         title="Map" 
         showBack={false}
         rightAction={
           <button 
             onClick={handleRefresh}
-            className="p-2 bg-white dark:bg-slate-900 transition-colors rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 text-blue-600 shadow-sm border border-gray-100 dark:border-slate-800"
+            className="p-2 bg-white dark:bg-slate-900 transition-colors rounded-xl hover:bg-gray-50 dark:hover:bg-slate-800 text-blue-600 shadow-sm border border-gray-100 dark:border-slate-800 shrink-0"
             aria-label="Refresh location"
           >
             <RefreshCw size={18} />

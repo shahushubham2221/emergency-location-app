@@ -61,10 +61,10 @@ export default function SOSHistory() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Emergency History" showBack />
       
-      <main className="px-4 py-4 pb-24 max-w-lg mx-auto">
+      <main className="px-3.5 sm:px-4 py-4 pb-24 max-w-lg mx-auto w-full">
         {loading ? (
           <div className="flex flex-col items-center justify-center py-16 gap-3">
             <Loader2 size={32} className="text-blue-500 animate-spin" />

@@ -80,7 +80,7 @@ export default function SOSCountdown() {
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-red-600 flex flex-col items-center justify-center px-6"
+      className="fixed inset-0 z-50 bg-red-600 flex flex-col items-center justify-center px-6 overflow-hidden"
       role="alertdialog"
       aria-modal="true"
       aria-label="SOS countdown in progress"

@@ -62,7 +62,7 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-dvh bg-[#F0F4FF] flex flex-col items-center justify-center px-4 py-8 sm:py-12 w-full overflow-x-hidden">
       {/* Logo */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -79,7 +79,7 @@ export default function Register() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
-        className="w-full max-w-sm bg-white/70 backdrop-blur border border-white/60 rounded-3xl shadow-xl p-8"
+        className="w-full max-w-sm bg-white/70 backdrop-blur border border-white/60 rounded-3xl shadow-xl p-6 sm:p-8"
       >
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Create account</h1>
         <p className="text-sm text-gray-500 mb-8">Join SOS Guardian and stay safe.</p>

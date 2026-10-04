@@ -45,7 +45,7 @@ export default function GuardianAssistant() {
   };
 
   return (
-    <div className="h-screen bg-[#F0F4FF] flex flex-col">
+    <div className="min-h-dvh bg-[#F0F4FF] flex flex-col w-full overflow-x-hidden">
       <Header title="Guardian Assistant" showBack />
       
       <div className="bg-amber-100 text-amber-800 text-xs py-2 px-4 flex items-center justify-center gap-2">
@@ -53,10 +53,10 @@ export default function GuardianAssistant() {
         <span className="font-medium text-center">For app guidance only. In a real emergency, call 112.</span>
       </div>
 
-      <main className="flex-1 overflow-y-auto p-4 space-y-4 pb-32">
+      <main className="flex-1 overflow-y-auto p-4 space-y-4 pb-36 max-w-lg mx-auto w-full">
         {messages.map((msg, i) => (
           <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
-            <div className={`max-w-[80%] rounded-2xl p-4 text-sm ${
+            <div className={`max-w-[85%] rounded-2xl p-4 text-sm ${
               msg.role === 'user' 
                 ? 'bg-blue-600 text-white rounded-tr-sm' 
                 : 'bg-white text-gray-800 shadow-sm border border-gray-100 rounded-tl-sm'
@@ -73,7 +73,10 @@ export default function GuardianAssistant() {
         <div ref={bottomRef} />
       </main>
 
-      <div className="fixed bottom-[60px] left-0 right-0 bg-white border-t border-gray-100 p-3 pb-8">
+      <div
+        className="fixed left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 p-3 z-20"
+        style={{ bottom: 'calc(52px + env(safe-area-inset-bottom, 0px))' }}
+      >
         <div className="max-w-lg mx-auto flex gap-2">
           <button
             onClick={() => navigate('/app/sos-countdown')}

@@ -96,7 +96,7 @@ export default function Landing() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] font-sans">
+    <div className="min-h-screen bg-[#F0F4FF] font-sans w-full overflow-x-hidden">
       {/* ── Navbar ── */}
       <nav className="sticky top-0 z-50 backdrop-blur-md bg-white/70 border-b border-white/40 px-6 py-4 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -192,7 +192,7 @@ export default function Landing() {
           <div className="w-40 h-40 rounded-full bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center shadow-2xl shadow-red-300">
             <Shield className="text-white" size={72} />
           </div>
-          <div className="absolute inset-0 rounded-full bg-red-400/20 animate-ping" style={{ animationDuration: '2s' }} />
+          <div className="absolute inset-0 rounded-full bg-red-400/20 animate-ping pointer-events-none" style={{ animationDuration: '2s' }} />
         </motion.div>
       </section>
 

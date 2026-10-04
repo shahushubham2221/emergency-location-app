@@ -20,10 +20,10 @@ export default function Profile() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Profile" showBack />
       
-      <main className="px-4 py-6 pb-24 max-w-lg mx-auto space-y-6">
+      <main className="px-3.5 sm:px-4 py-6 pb-24 max-w-lg mx-auto space-y-6 w-full">
         <div className="bg-white dark:bg-slate-900 transition-colors rounded-2xl shadow-sm border border-white/60 dark:border-slate-800 p-6 flex flex-col items-center">
           <div className="w-24 h-24 rounded-full bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4 text-3xl font-bold">
             {profile?.displayName?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || 'U'}

@@ -21,12 +21,12 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header
       className={twMerge(
-        'sticky top-0 z-20 bg-white/80 dark:bg-slate-900/80 transition-colors backdrop-blur-md border-b border-gray-100 dark:border-slate-800',
+        'sticky top-0 z-20 w-full max-w-full bg-white/80 dark:bg-slate-900/80 transition-colors backdrop-blur-md border-b border-gray-100 dark:border-slate-800',
         'shadow-[0_1px_8px_rgba(0,0,0,0.05)] dark:shadow-[0_1px_8px_rgba(0,0,0,0.3)]',
         className
       )}
     >
-      <div className="flex items-center min-h-[56px] px-4 gap-2 max-w-lg mx-auto">
+      <div className="flex items-center min-h-[56px] px-3.5 sm:px-4 gap-2 w-full max-w-lg mx-auto">
         {/* Back button */}
         {showBack ? (
           <button
@@ -40,11 +40,11 @@ export const Header: React.FC<HeaderProps> = ({
             <ChevronLeft size={22} aria-hidden="true" />
           </button>
         ) : (
-          <span className="w-0" />
+          <span className="w-0 shrink-0" />
         )}
 
         {/* Title */}
-        <h1 className="flex-1 text-lg font-bold text-gray-900 dark:text-gray-100 truncate">
+        <h1 className="flex-1 min-w-0 text-base sm:text-lg font-bold text-gray-900 dark:text-gray-100 truncate">
           {title}
         </h1>
 
@@ -52,7 +52,7 @@ export const Header: React.FC<HeaderProps> = ({
         {rightAction ? (
           <div className="shrink-0">{rightAction}</div>
         ) : (
-          <span className="w-10" />
+          <span className={showBack ? 'w-10 shrink-0' : 'w-0 shrink-0'} />
         )}
       </div>
     </header>

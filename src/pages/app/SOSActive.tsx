@@ -208,7 +208,7 @@ export default function SOSActive() {
   const hasGPSError = locationState === 'error' || locationState === 'denied' || locationState === 'unavailable';
 
   return (
-    <div className="min-h-screen bg-red-600 flex flex-col">
+    <div className="min-h-dvh bg-red-600 flex flex-col w-full max-w-full overflow-x-hidden">
       <SOSTimer />
 
       {/* Header */}
@@ -234,7 +234,7 @@ export default function SOSActive() {
       </div>
 
       {/* Content cards */}
-      <div className="flex-1 bg-[#F0F4FF] dark:bg-slate-950 transition-colors rounded-t-3xl px-4 pt-5 pb-24 space-y-3">
+      <div className="flex-1 bg-[#F0F4FF] dark:bg-slate-950 transition-colors rounded-t-3xl px-4 pt-5 pb-32 space-y-3 w-full">
         {/* Network/sync status */}
         <div className={`flex items-center gap-3 rounded-2xl px-4 py-3 ${isOnline ? 'bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-800/50' : 'bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800/50'}`}>
           {isOnline ? (
@@ -315,7 +315,7 @@ export default function SOSActive() {
       </div>
 
       {/* Stop SOS button — fixed at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#F0F4FF] dark:bg-slate-950 transition-colors/90 backdrop-blur border-t border-gray-100 dark:border-slate-800">
+      <div className="fixed bottom-0 left-0 right-0 p-4 pb-[max(1rem,env(safe-area-inset-bottom,0px))] bg-[#F0F4FF]/95 dark:bg-slate-950/95 transition-colors backdrop-blur border-t border-gray-100 dark:border-slate-800 z-30">
         <button
           onClick={() => setShowStopConfirm(true)}
           className="w-full max-w-lg mx-auto flex items-center justify-center gap-2 py-4 bg-white dark:bg-slate-900 transition-colors border-2 border-red-500 text-red-600 font-bold text-lg rounded-2xl min-h-[64px] hover:bg-red-50 dark:hover:bg-red-900/40 transition-colors active:scale-95 shadow-sm"

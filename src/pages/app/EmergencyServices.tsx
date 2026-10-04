@@ -54,22 +54,22 @@ export default function EmergencyServices() {
   const filtered = filter === 'all' ? services : services.filter((s) => s.category === filter);
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Nearby Emergency Services" showBack />
 
-      <main className="px-4 py-4 pb-24 max-w-lg mx-auto space-y-4">
+      <main className="px-3.5 sm:px-4 py-4 pb-24 max-w-lg mx-auto space-y-4 w-full">
         {/* Quick dial row */}
-        <div className="grid grid-cols-4 gap-2">
+        <div className="grid grid-cols-4 gap-1.5 sm:gap-2">
           {QUICK_DIAL.map(({ label, number, emoji, color }) => (
             <button
               key={number}
               onClick={() => openEmergencyCall(number)}
-              className={`flex flex-col items-center gap-1 p-2.5 rounded-2xl border text-center ${color} hover:opacity-80 transition-opacity active:scale-95`}
+              className={`flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 rounded-2xl border text-center ${color} hover:opacity-80 transition-opacity active:scale-95 min-w-0 overflow-hidden`}
               aria-label={`Call ${label} at ${number}`}
             >
-              <span className="text-xl" aria-hidden="true">{emoji}</span>
-              <span className="text-xs font-bold">{number}</span>
-              <span className="text-[10px] opacity-80">{label}</span>
+              <span className="text-lg sm:text-xl leading-none" aria-hidden="true">{emoji}</span>
+              <span className="text-xs font-bold leading-tight">{number}</span>
+              <span className="text-[9px] sm:text-[10px] opacity-80 truncate max-w-full leading-tight">{label}</span>
             </button>
           ))}
         </div>

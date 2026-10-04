@@ -34,10 +34,10 @@ export default function Help() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF]">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Help & FAQ" showBack />
       
-      <main className="px-4 py-6 pb-24 max-w-lg mx-auto space-y-4">
+      <main className="px-3.5 sm:px-4 py-6 pb-24 max-w-lg mx-auto space-y-4 w-full">
         <div className="bg-blue-600 rounded-2xl p-6 text-white text-center mb-6">
           <HelpCircle size={48} className="mx-auto mb-4 opacity-90" />
           <h2 className="text-xl font-bold mb-2">How can we help?</h2>

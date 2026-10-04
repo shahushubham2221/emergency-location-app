@@ -4,10 +4,10 @@ import { Shield, EyeOff, Database, Trash2 } from 'lucide-react';
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-[#F0F4FF]">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Privacy & Security" showBack />
       
-      <main className="px-4 py-6 pb-24 max-w-lg mx-auto space-y-4">
+      <main className="px-3.5 sm:px-4 py-6 pb-24 max-w-lg mx-auto space-y-4 w-full">
         
         <div className="bg-white rounded-2xl p-5 shadow-sm border border-gray-100 flex items-start gap-4">
           <Shield className="text-emerald-500 shrink-0 mt-1" size={24} />

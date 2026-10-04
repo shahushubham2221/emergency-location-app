@@ -54,10 +54,10 @@ export default function Settings() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors w-full overflow-x-hidden">
       <Header title="Settings" showBack={false} />
       
-      <main className="px-4 py-6 pb-24 max-w-lg mx-auto space-y-8">
+      <main className="px-3.5 sm:px-4 py-6 pb-24 max-w-lg mx-auto space-y-8 w-full">
         
         {sections.map((section, i) => (
           <div key={i}>

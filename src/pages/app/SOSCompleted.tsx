@@ -21,9 +21,9 @@ export default function SOSCompleted() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col items-center justify-center px-5 py-10">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col items-center justify-center px-4 sm:px-5 py-8 sm:py-10 w-full overflow-x-hidden">
       <motion.div
-        initial={{ scale: 0.5, opacity: 0 }}
+        initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ type: 'spring', damping: 15 }}
         className="flex flex-col items-center text-center max-w-sm w-full"

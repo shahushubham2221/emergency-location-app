@@ -374,7 +374,7 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F0F4FF] flex flex-col items-center justify-center px-4 py-12">
+    <div className="min-h-dvh bg-[#F0F4FF] flex flex-col items-center justify-center px-4 py-8 sm:py-12 w-full overflow-x-hidden">
       <div className="w-full max-w-sm">
         <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2">
@@ -384,7 +384,7 @@ export default function Onboarding() {
           <p className="text-xs text-gray-400 mt-1">Setup — {step} of {TOTAL_STEPS}</p>
         </div>
 
-        <div className="bg-white/70 backdrop-blur border border-white/60 rounded-3xl shadow-xl p-8">
+        <div className="bg-white/70 backdrop-blur border border-white/60 rounded-3xl shadow-xl p-6 sm:p-8">
           <ProgressDots />
 
           <AnimatePresence mode="wait">

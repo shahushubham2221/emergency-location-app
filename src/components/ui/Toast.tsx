@@ -58,14 +58,14 @@ const ToastItem: React.FC<ToastItemProps> = ({ toast }) => {
   return (
     <motion.div
       layout
-      initial={{ opacity: 0, x: 60, scale: 0.9 }}
-      animate={{ opacity: 1, x: 0, scale: 1 }}
-      exit={{ opacity: 0, x: 60, scale: 0.9, transition: { duration: 0.2 } }}
+      initial={{ opacity: 0, y: -20, scale: 0.95 }}
+      animate={{ opacity: 1, y: 0, scale: 1 }}
+      exit={{ opacity: 0, y: -20, scale: 0.95, transition: { duration: 0.2 } }}
       transition={{ type: 'spring', damping: 24, stiffness: 280 }}
       role="alert"
       aria-live="assertive"
       aria-atomic="true"
-      className={`flex items-start gap-3 w-full max-w-sm rounded-2xl border p-4 shadow-lg ${bg}`}
+      className={`flex items-start gap-3 w-full max-w-sm rounded-2xl border p-3.5 sm:p-4 shadow-lg ${bg}`}
     >
       <Icon
         size={20}
@@ -107,11 +107,11 @@ export const ToastContainer: React.FC = () => {
   return (
     <div
       aria-label="Notifications"
-      className="fixed top-4 right-4 z-[100] flex flex-col gap-2 items-end pointer-events-none"
+      className="fixed top-4 right-4 left-4 sm:left-auto z-[100] flex flex-col gap-2 items-end pointer-events-none max-w-sm ml-auto"
     >
       <AnimatePresence mode="popLayout">
         {toasts.map((toast) => (
-          <div key={toast.id} className="pointer-events-auto">
+          <div key={toast.id} className="pointer-events-auto w-full">
             <ToastItem toast={toast} />
           </div>
         ))}

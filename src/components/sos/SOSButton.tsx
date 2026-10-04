@@ -6,20 +6,20 @@ export const SOSButton: React.FC<{
   disabled?: boolean;
 }> = ({ onPress, disabled = false }) => {
   return (
-    <div className="flex flex-col items-center gap-4 select-none">
+    <div className="flex flex-col items-center gap-3 select-none max-w-full p-2">
       {/* Pulsing ring container */}
-      <div className="relative flex items-center justify-center w-44 h-44">
+      <div className="relative flex items-center justify-center w-36 h-36 sm:w-44 sm:h-44 max-w-full">
         {/* Outer pulse rings — only when idle (not disabled) */}
         {!disabled && (
           <>
             <span
               aria-hidden="true"
-              className="absolute inset-0 rounded-full bg-red-400/20 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"
+              className="absolute inset-0 rounded-full bg-red-400/20 animate-[ping_2.4s_cubic-bezier(0,0,0.2,1)_infinite] pointer-events-none"
               style={{ animationDelay: '0s' }}
             />
             <span
               aria-hidden="true"
-              className="absolute inset-3 rounded-full bg-red-400/25 animate-[ping_2s_cubic-bezier(0,0,0.2,1)_infinite]"
+              className="absolute inset-2 sm:inset-3 rounded-full bg-red-400/25 animate-[ping_2.4s_cubic-bezier(0,0,0.2,1)_infinite] pointer-events-none"
               style={{ animationDelay: '0.4s' }}
             />
           </>
@@ -28,16 +28,16 @@ export const SOSButton: React.FC<{
         {/* Button */}
         <motion.button
           whileTap={disabled ? {} : { scale: 0.93 }}
-          whileHover={disabled ? {} : { scale: 1.04 }}
+          whileHover={disabled ? {} : { scale: 1.03 }}
           transition={{ type: 'spring', stiffness: 400, damping: 20 }}
           onClick={disabled ? undefined : onPress}
           disabled={disabled}
           aria-label="Press to activate SOS emergency alert"
           aria-disabled={disabled}
           className={[
-            'relative z-10 w-36 h-36 rounded-full',
+            'relative z-10 w-32 h-32 sm:w-36 sm:h-36 rounded-full',
             'flex flex-col items-center justify-center gap-1',
-            'shadow-[0_8px_32px_rgba(220,38,38,0.45)]',
+            'shadow-[0_8px_32px_rgba(220,38,38,0.45)] dark:shadow-red-950/60',
             'focus:outline-none focus-visible:ring-4 focus-visible:ring-red-400 focus-visible:ring-offset-4',
             'transition-opacity duration-200',
             disabled
@@ -48,7 +48,7 @@ export const SOSButton: React.FC<{
           {/* SOS text */}
           <span
             aria-hidden="true"
-            className="text-white font-black text-3xl tracking-widest leading-none"
+            className="text-white font-black text-2xl sm:text-3xl tracking-widest leading-none"
           >
             SOS
           </span>

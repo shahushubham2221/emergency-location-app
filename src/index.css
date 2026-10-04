@@ -9,12 +9,35 @@
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-* {
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   -webkit-tap-highlight-color: transparent;
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  -webkit-text-size-adjust: 100%;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
 .safe-area-pb {
-  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom, 0px));
 }
 
 /* Smooth scrolling globally */

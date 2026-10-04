@@ -8,14 +8,14 @@ import { useSOSHydration } from '../../hooks/useSOSHydration';
 export const AppLayout: React.FC = () => {
   useSOSHydration();
   return (
-    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col">
+    <div className="min-h-dvh bg-[#F0F4FF] dark:bg-slate-950 transition-colors flex flex-col w-full max-w-full overflow-x-hidden">
       {/* Offline status banner – fixed top */}
       <OfflineBanner />
 
       {/* Page content */}
       <main
         id="main-content"
-        className="flex-1 pb-20 w-full max-w-lg mx-auto px-0"
+        className="flex-1 w-full max-w-lg mx-auto px-0 pb-[calc(4.75rem+env(safe-area-inset-bottom,0px))]"
         aria-label="Page content"
       >
         <Outlet />
